@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySQL Presentation - Matrix Theme</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            height: 100%;
+            background-color: #000;
+            color: #0F0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+        }
+
+        /* Matrix Background */
+        #matrixCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Presentation Container */
+        #presentation {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Slide Styling */
+        .slide {
+            display: none;
+            background: rgba(0, 10, 0, 0.85);
+            border: 2px solid #0F0;
+            box-shadow: 0 0 20px #0F0, inset 0 0 20px #0F0;
+            width: 70%;
+            max-width: 900px;
+            padding: 40px;
+            border-radius: 10px;
+            animation: glitchFade 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes glitchFade {
+            0% { opacity: 0; transform: scale(0.95); text-shadow: 2px 0 red, -2px 0 blue; }
+            50% { opacity: 0.5; text-shadow: -2px 0 red, 2px 0 blue; }
+            100% { opacity: 1; transform: scale(1); text-shadow: 0 0 5px #0F0; }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #0F0;
+            border-bottom: 1px solid #0F0;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 0 0 8px #fff;
+        }
+
+        ul {
+            list-style-type: none;
+            font-size: 1.2em;
+            line-height: 1.8;
+        }
+
+        ul li::before {
+            content: ">_ ";
+            color: #fff;
+        }
+
+        code {
+            background-color: #002200;
+            border: 1px solid #0F0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #fff;
+        }
+
+        /* Navigation Controls */
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 3;
+        }
+
+        button {
+            background-color: black;
+            color: #0F0;
+            border: 1px solid #0F0;
+            padding: 10px 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 0 5px #0F0;
+        }
+
+        button:hover {
+            background-color: #0F0;
+            color: black;
+            box-shadow: 0 0 15px #0F0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Presentation Content -->
+    <div id="presentation">
+        
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <h1>SYS.INITIALIZE: MySQL</h1>
+            <div style="text-align: center; margin-top: 40px;">
+                <h2>Unlocking the Power of Relational Data</h2>
+                <p style="margin-top: 20px; font-size: 1.2em;">PRESS [NEXT] OR [RIGHT ARROW] TO CONTINUE...</p>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <h1>What is MySQL?</h1>
+            <ul>
+                <li>An Open-Source <strong>Relational Database Management System (RDBMS)</strong>.</li>
+                <li>Developed, distributed, and supported by Oracle Corporation.</li>
+                <li>Uses <strong>SQL (Structured Query Language)</strong> as its primary interface.</li>
+                <li>Stores data in highly organized tables, rows, and columns.</li>
+                <li>The backbone of many web applications (LAMP Stack: Linux, Apache, MySQL, PHP/Python/Perl).</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <h1>Core Features</h1>
+            <ul>
+                <li><strong>ACID Compliance:</strong> Ensures data Atomicity, Consistency, Isolation, and Durability (via InnoDB).</li>
+                <li><strong>High Performance:</strong> Optimized query engine and fast memory caches.</li>
+                <li><strong>Scalability:</strong> Handles massive databases with millions of records.</li>
+                <li><strong>Security:</strong> Robust privilege and password system, with host-based verification.</li>
+                <li><strong>Cross-Platform:</strong> Runs on Linux, Windows, macOS, and more.</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <h1>System Architecture</h1>
+            <ul>
+                <li><strong>Client-Server Model:</strong> Clients send SQL queries, the server executes them and returns results.</li>
+                <li><strong>Connection Pool:</strong> Manages authentication, threads, and security.</li>
+                <li><strong>SQL Interface:</strong> Parses, plans, and optimizes queries.</li>
+                <li><strong>Pluggable Storage Engines:</strong> 
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp; - <code>InnoDB</code> (Default, supports transactions)
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp; - <code>MyISAM</code> (Fast read-heavy ops, no transactions)
+                </li>
+            </ul>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <h1>Essential Commands</h1>
+            <ul>
+                <li><strong>DDL (Data Definition):</strong> <code>CREATE DATABASE db_name;</code> | <code>CREATE TABLE tbl_name (...);</code></li>
+                <li><strong>DML (Data Manipulation):</strong> <code>INSERT INTO tbl_name VALUES (...);</code> | <code>UPDATE...</code></li>
+                <li><strong>DQL (Data Query):</strong> <code>SELECT * FROM users WHERE status = 'active';</code></li>
+                <li><strong>DCL (Data Control):</strong> <code>GRANT ALL PRIVILEGES ON db.* TO 'user'@'localhost';</code></li>
+            </ul>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <h1>SYS.TERMINATE</h1>
+            <div style="text-align: center; margin-top: 40px;">
+                <h2>Connection Closed Successfully.</h2>
+                <p style="margin-top: 20px; font-size: 1.2em;">Any Questions?</p>
+                <p style="margin-top: 10px;">_EOF</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="controls">
+        <button onclick="changeSlide(-1)">[PREV]</button>
+        <button onclick="changeSlide(1)">[NEXT]</button>
+    </div>
+
+    <script>
+        // --- SLIDE LOGIC ---
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide += direction;
+
+            // Loop logic
+            if (currentSlide >= slides.length) {
+                currentSlide = 0;
+            } else if (currentSlide < 0) {
+                currentSlide = slides.length - 1;
+            }
+
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space') {
+                changeSlide(1);
+            } else if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            }
+        });
+
+        // --- MATRIX RAIN LOGIC ---
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Katakana + Latin characters
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        // Array of drops - one per column
+        const drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function drawMatrix() {
+            // Translucent black to create fading trails
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0'; // Green text
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                // Pick a random character
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+
+                // Draw the character
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Reset drop to top randomly to create staggered rain
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                // Move drop down
+                drops[i]++;
+            }
+        }
+
+        // Run the animation
+        setInterval(drawMatrix, 33);
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
